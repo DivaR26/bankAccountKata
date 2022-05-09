@@ -1,5 +1,6 @@
 package printer;
 
+import transaction.Amount;
 import transaction.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,23 +26,23 @@ class StatementPrinterTest {
     private StatementPrinter statementPrinter;
 
     @BeforeEach
-    public void init(){
-        statementPrinter= new StatementPrinter(accountConsole);
+    public void init() {
+        statementPrinter = new StatementPrinter(accountConsole);
     }
 
     @Test
-    public void printHeader(){
+    public void printHeader() {
         statementPrinter.printAccountHistory(new ArrayList<>());
         verify(accountConsole).printLine("DATE | AMOUNT | ACCOUNT BALANCE");
     }
 
     @Test
-    public void printHistory(){
+    public void printAccountHistory() {
         List<Transaction> transactions = createMockTransactions();
 
         statementPrinter.printAccountHistory(transactions);
 
-        InOrder inOrder= Mockito.inOrder(accountConsole);
+        InOrder inOrder = Mockito.inOrder(accountConsole);
         inOrder.verify(accountConsole).printLine("DATE | AMOUNT | ACCOUNT BALANCE");
         inOrder.verify(accountConsole).printLine("2022-03-05 | -50,00 | 1250,00");
         inOrder.verify(accountConsole).printLine("2022-02-03 | 1200,00 | 1300,00");
@@ -50,9 +51,9 @@ class StatementPrinterTest {
 
     private List<Transaction> createMockTransactions() {
         return Arrays.asList(
-                new Transaction(LocalDate.of(2022,1,2),100)
-                ,new Transaction(LocalDate.of(2022,2,3),1200)
-                ,new Transaction(LocalDate.of(2022,3,5),-50)
+                new Transaction(LocalDate.of(2022, 1, 2), Amount.valueOf(100))
+                , new Transaction(LocalDate.of(2022, 2, 3), Amount.valueOf(1200))
+                , new Transaction(LocalDate.of(2022, 3, 5), Amount.valueOf(-50))
         );
     }
 

@@ -6,11 +6,19 @@ import java.util.Objects;
 public class Transaction {
 
     LocalDate date;
-    int amount;
+    Amount amount;
 
-    public Transaction(LocalDate date, int amount) {
+    public Transaction(LocalDate date, Amount amount) {
         this.date = date;
         this.amount = amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Amount getAmount() {
+        return amount;
     }
 
     @Override
@@ -18,19 +26,11 @@ public class Transaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return amount == that.amount && Objects.equals(date, that.date);
+        return Objects.equals(date, that.date) && Objects.equals(amount, that.amount);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(date, amount);
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

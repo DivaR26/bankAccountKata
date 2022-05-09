@@ -18,7 +18,7 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 class TransactionRepositoryTest {
 
-    private static final LocalDate TRANSACTION_DATE = LocalDate.of(2022,4,22);
+    private static final LocalDate TRANSACTION_DATE = LocalDate.of(2022, 4, 22);
 
     @Mock
     DateGenerator dateGenerator;
@@ -33,21 +33,21 @@ class TransactionRepositoryTest {
     @Test
     public void createDepositTransaction() {
         given(dateGenerator.getCurrentDate()).willReturn(TRANSACTION_DATE);
-        transactionRepository.createDepositTransaction(100);
+        transactionRepository.createDepositTransaction(Amount.valueOf(100));
         List<Transaction> transactions = transactionRepository.findAllTransactions();
         assertEquals(1, transactions.size());
-        assertThat(transactions.get(0), is(transaction(100)));
+        assertThat(transactions.get(0), is(transaction((Amount.valueOf(100)))));
     }
 
     @Test
     public void createWithdrawalTransaction() {
-        transactionRepository.createWithdrawalTransaction(50);
+        transactionRepository.createWithdrawalTransaction(Amount.valueOf(50));
         List<Transaction> transactions = transactionRepository.findAllTransactions();
         assertEquals(1, transactions.size());
-        assertThat(transactions.get(0), is(transaction(-50)));
+        assertThat(transactions.get(0), is(transaction(Amount.valueOf(50).asNegative())));
     }
 
-    private Transaction transaction(int amount) {
+    private Transaction transaction(Amount amount) {
         return new Transaction(TransactionRepositoryTest.TRANSACTION_DATE, amount);
     }
 

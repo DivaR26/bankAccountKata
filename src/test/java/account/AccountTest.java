@@ -1,13 +1,13 @@
 package account;
 
-import account.Account;
-import transaction.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import printer.StatementPrinter;
+import transaction.Amount;
+import transaction.TransactionRepository;
 
 import java.util.ArrayList;
 
@@ -26,24 +26,24 @@ public class AccountTest {
     StatementPrinter statementPrinter;
 
     @BeforeEach
-    public void init(){
-        account=new Account(transactionRepository,statementPrinter);
+    public void init() {
+        account = new Account(transactionRepository, statementPrinter);
     }
 
     @Test
-    public void deposit(){
-        account.deposit(100);
-        verify(transactionRepository, times(1)).createDepositTransaction(100);
+    public void deposit() {
+        account.deposit(Amount.valueOf(100));
+        verify(transactionRepository, times(1)).createDepositTransaction(Amount.valueOf(100));
     }
 
     @Test
-    public void withdraw(){
-        account.withdraw(100);
-        verify(transactionRepository, times(1)).createWithdrawalTransaction(100);
+    public void withdraw() {
+        account.withdraw(Amount.valueOf(100));
+        verify(transactionRepository, times(1)).createWithdrawalTransaction(Amount.valueOf(100));
     }
 
     @Test
-    public void printStatement(){
+    public void printStatement() {
         given(transactionRepository.findAllTransactions()).willReturn(new ArrayList<>());
         account.printStatement();
         verify(statementPrinter, times(1)).printAccountHistory(any());

@@ -15,13 +15,13 @@ public class TransactionRepository {
         this.dateGenerator = dateGenerator;
     }
 
-    public void createDepositTransaction(int amount) {
+    public void createDepositTransaction(Amount amount) {
         Transaction depositTransaction = new Transaction(dateGenerator.getCurrentDate(), amount);
         accountTransactions.add(depositTransaction);
     }
 
-    public void createWithdrawalTransaction(int amount) {
-        Transaction withdrawalTransaction = new Transaction(dateGenerator.getCurrentDate(), -amount);
+    public void createWithdrawalTransaction(Amount amount) {
+        Transaction withdrawalTransaction = new Transaction(dateGenerator.getCurrentDate(), amount.asNegative());
         accountTransactions.add(withdrawalTransaction);
     }
 

@@ -1,5 +1,6 @@
 package printer;
 
+import transaction.Amount;
 import transaction.Transaction;
 
 import java.text.DecimalFormat;
@@ -10,8 +11,8 @@ import java.util.stream.Collectors;
 public class StatementPrinter {
 
     private final Console accountConsole;
-    private int accountBalance = 0;
-    private final DecimalFormat decimalFormatter = new DecimalFormat("#.00");
+    Amount accountBalance = Amount.ZERO;
+    DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     public StatementPrinter(Console accountConsole) {
         this.accountConsole = accountConsole;
@@ -32,12 +33,14 @@ public class StatementPrinter {
                 + " | " + formatAmount(calculateAccountBalance(transaction.getAmount()));
     }
 
-    private int calculateAccountBalance(int amount) {
-        accountBalance += amount;
+    private String formatAmount(Amount amount) {
+        return amount.format(decimalFormat);
+
+    }
+
+    private Amount calculateAccountBalance(Amount amount) {
+        accountBalance = accountBalance.addAndGet(amount);
         return accountBalance;
     }
 
-    private String formatAmount(int amount) {
-        return decimalFormatter.format(amount);
-    }
 }

@@ -1,6 +1,7 @@
 package account;
 
 import printer.StatementPrinter;
+import transaction.Amount;
 import transaction.Transaction;
 import transaction.TransactionRepository;
 
@@ -16,11 +17,11 @@ public class Account {
         this.statementPrinter = statementPrinter;
     }
 
-    public void deposit(int amount) {
+    public void deposit(Amount amount) {
         transactionRepository.createDepositTransaction(amount);
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(Amount amount) {
         transactionRepository.createWithdrawalTransaction(amount);
     }
 
