@@ -9,16 +9,16 @@ import static org.hamcrest.Matchers.is;
 
 class DateGeneratorTest {
 
-    DateGenerator dateGenerator = new SpecificDateGenerator();
+    private final DateGenerator dateGenerator = new SpecificDateGenerator();
 
     @Test
-    public void currentDateAsString(){
+    void currentDateAsString(){
         String currentDate = dateGenerator.currentDateAsString();
         assertThat(currentDate,is("2022-01-02"));
     }
 
     @Test
-    public void getCurrentDate(){
+    void getCurrentDate(){
         LocalDate currentDate = dateGenerator.getCurrentDate();
         assertThat(currentDate,is(LocalDate.of(2022,1,2)));
     }

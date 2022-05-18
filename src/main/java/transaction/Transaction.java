@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Transaction {
 
-    LocalDate date;
-    Amount amount;
+    private final LocalDate date;
+    private final Amount amount;
 
     public Transaction(LocalDate date, Amount amount) {
         this.date = date;

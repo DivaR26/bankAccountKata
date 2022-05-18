@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 class StatementPrinterTest {
 
     @Mock
-    Console accountConsole;
+    private Console accountConsole;
 
     private StatementPrinter statementPrinter;
 
@@ -31,13 +31,13 @@ class StatementPrinterTest {
     }
 
     @Test
-    public void printHeader() {
+    void printHeader() {
         statementPrinter.printAccountHistory(new ArrayList<>());
         verify(accountConsole).printLine("DATE | AMOUNT | ACCOUNT BALANCE");
     }
 
     @Test
-    public void printAccountHistory() {
+    void printAccountHistory() {
         List<Transaction> transactions = createMockTransactions();
 
         statementPrinter.printAccountHistory(transactions);

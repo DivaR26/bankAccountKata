@@ -17,33 +17,33 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountTest {
+class AccountTest {
 
-    Account account;
+    private Account account;
     @Mock
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
     @Mock
-    StatementPrinter statementPrinter;
+    private StatementPrinter statementPrinter;
 
     @BeforeEach
-    public void init() {
+    void init() {
         account = new Account(transactionRepository, statementPrinter);
     }
 
     @Test
-    public void deposit() {
+     void deposit() {
         account.deposit(Amount.valueOf(100));
         verify(transactionRepository, times(1)).createDepositTransaction(Amount.valueOf(100));
     }
 
     @Test
-    public void withdraw() {
+     void withdraw() {
         account.withdraw(Amount.valueOf(100));
         verify(transactionRepository, times(1)).createWithdrawalTransaction(Amount.valueOf(100));
     }
 
     @Test
-    public void printStatement() {
+    void printStatement() {
         given(transactionRepository.findAllTransactions()).willReturn(new ArrayList<>());
         account.printStatement();
         verify(statementPrinter, times(1)).printAccountHistory(any());

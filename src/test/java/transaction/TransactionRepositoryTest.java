@@ -21,17 +21,18 @@ class TransactionRepositoryTest {
     private static final LocalDate TRANSACTION_DATE = LocalDate.of(2022, 4, 22);
 
     @Mock
-    DateGenerator dateGenerator;
+    private DateGenerator dateGenerator;
+
     private TransactionRepository transactionRepository;
 
     @BeforeEach
-    public void init() {
+    void init() {
         transactionRepository = new TransactionRepository(dateGenerator);
         given(dateGenerator.getCurrentDate()).willReturn(TRANSACTION_DATE);
     }
 
     @Test
-    public void createDepositTransaction() {
+    void createDepositTransaction() {
         given(dateGenerator.getCurrentDate()).willReturn(TRANSACTION_DATE);
         transactionRepository.createDepositTransaction(Amount.valueOf(100));
         List<Transaction> transactions = transactionRepository.findAllTransactions();
@@ -40,7 +41,7 @@ class TransactionRepositoryTest {
     }
 
     @Test
-    public void createWithdrawalTransaction() {
+    void createWithdrawalTransaction() {
         transactionRepository.createWithdrawalTransaction(Amount.valueOf(50));
         List<Transaction> transactions = transactionRepository.findAllTransactions();
         assertEquals(1, transactions.size());

@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class StatementPrinter {
 
     private final Console accountConsole;
-    Amount accountBalance = Amount.ZERO;
-    DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+    private Amount accountBalance = Amount.ZERO;
+    private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     public StatementPrinter(Console accountConsole) {
         this.accountConsole = accountConsole;

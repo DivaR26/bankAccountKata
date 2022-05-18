@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Account {
 
-    TransactionRepository transactionRepository;
-    StatementPrinter statementPrinter;
+    private final TransactionRepository transactionRepository;
+    private final StatementPrinter statementPrinter;
 
     public Account(TransactionRepository transactionRepository, StatementPrinter statementPrinter) {
         this.transactionRepository = transactionRepository;

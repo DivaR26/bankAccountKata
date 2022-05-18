@@ -22,12 +22,12 @@ import static org.mockito.BDDMockito.given;
  * Acceptance test for US3
  */
 @ExtendWith(MockitoExtension.class)
-public class AccountHistoryFeatureTest {
+class AccountHistoryFeatureTest {
 
     @Mock
-    Console accountConsole;
+    private Console accountConsole;
     @Mock
-    DateGenerator dateGenerator;
+    private DateGenerator dateGenerator;
 
     private Account account;
 
@@ -39,7 +39,7 @@ public class AccountHistoryFeatureTest {
     }
 
     @Test
-    public void checkHistoryOfOperations() {
+    void checkHistoryOfOperations() {
         given(dateGenerator.getCurrentDate()).willReturn(
                 LocalDate.of(2022, 1, 2),
                 LocalDate.of(2022, 2, 3),

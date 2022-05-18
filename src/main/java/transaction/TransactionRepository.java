@@ -9,7 +9,7 @@ import java.util.List;
 public class TransactionRepository {
 
     private final DateGenerator dateGenerator;
-    List<Transaction> accountTransactions = new ArrayList<>();
+    private final List<Transaction> accountTransactions = new ArrayList<>();
 
     public TransactionRepository(DateGenerator dateGenerator) {
         this.dateGenerator = dateGenerator;
